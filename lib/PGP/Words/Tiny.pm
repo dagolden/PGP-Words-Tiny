@@ -129,6 +129,8 @@ all of L<Crypt::OpenPGP>.  This module also provides decoding functions.
 
 =head1 USAGE
 
+The following functions are available for import.  None are imported by default.
+
 =head2 encode_pgp
 
   @words = encode_pgp( $octets );
@@ -162,7 +164,7 @@ Input words are not case sensistive.
   $hex_string = decode_pgp_hex( @words );
   $hex_string = decode_pgp_hex( $string );
 
-Returns a string of hex digits (preceded by "0x") decoded from a list
+Returns a string of lowercase hex digits (preceded by "0x") decoded from a list
 of PGP words.  It otherwise functions like C<decode_pgp>.
 
 =cut

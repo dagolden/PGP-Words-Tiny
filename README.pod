@@ -19,19 +19,21 @@ version 0.001
 =head1 DESCRIPTION
 
 This module converts octets to or from the
-L<PGP Word List|http://en.wikipedia.org/wiki/PGP_word_list>, allowing
+L<PGP word list|http://en.wikipedia.org/wiki/PGP_word_list>, allowing
 a byte sequence to be conveyed via easily readable words.
 
 It is similar in function to L<Crypt::OpenPGP::Words>, but without requiring
-all of L<Crypt::OpenPGP>.  It also provided decoding functions.
+all of L<Crypt::OpenPGP>.  This module also provides decoding functions.
 
 =head1 USAGE
+
+The following functions are available for import.  None are imported by default.
 
 =head2 encode_pgp
 
   @words = encode_pgp( $octets );
 
-Returns a list of words drawn from the PGP word list correponding to each octet
+Returns a list of words drawn from the PGP word list corresponding to each octet
 in the input string.  Even-position octets (starting at octet zero) are drawn from the
 even word list.  Odd-position octets are drawn from the odd word list.
 
@@ -39,7 +41,7 @@ Proper nouns are capitalized as per the official word list.
 
 =head2 encode_pgp_hex
 
-  @words = encode_pgp_hex( $hex_digits );
+  @words = encode_pgp_hex( $hex_string );
 
 Converts a string of hex digits (with or without leading "0x") to an octet
 string and returns the result of passing that octet string to C<encode_pgp>.
@@ -53,29 +55,15 @@ Returns a string of octets decoded from a list of PGP words or from a
 space-separated string of PGP words.  An exception is thrown if a word
 is not in the PGP word list or is not in the correct even/odd position.
 
-Input words are not case sensistive.
+Input words are not case sensitive.
 
 =head2 decode_pgp_hex
 
   $hex_string = decode_pgp_hex( @words );
   $hex_string = decode_pgp_hex( $string );
 
-Returns a string of hex digits (preceded by "0x") decoded from a list
+Returns a string of lowercase hex digits (preceded by "0x") decoded from a list
 of PGP words.  It otherwise functions like C<decode_pgp>.
-
-=head1 SEE ALSO
-
-=over 4
-
-=item *
-
-L<Crypt::OpenPGP::Words>
-
-=item *
-
-L<PGP Word List|http://en.wikipedia.org/wiki/PGP_word_list>.
-
-=back
 
 =for :stopwords cpan testmatrix url annocpan anno bugtracker rt cpants kwalitee diff irc mailto metadata placeholders metacpan
 

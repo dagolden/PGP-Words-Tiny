@@ -135,7 +135,7 @@ The following functions are available for import.  None are imported by default.
 
   @words = encode_pgp( $octets );
 
-Returns a list of words drawn from the PGP word list correponding to each octet
+Returns a list of words drawn from the PGP word list corresponding to each octet
 in the input string.  Even-position octets (starting at octet zero) are drawn from the
 even word list.  Odd-position octets are drawn from the odd word list.
 
@@ -157,7 +157,7 @@ Returns a string of octets decoded from a list of PGP words or from a
 space-separated string of PGP words.  An exception is thrown if a word
 is not in the PGP word list or is not in the correct even/odd position.
 
-Input words are not case sensistive.
+Input words are not case sensitive.
 
 =head2 decode_pgp_hex
 

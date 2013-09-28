@@ -13,31 +13,33 @@ our @EXPORT_OK = qw(encode_pgp decode_pgp encode_pgp_hex decode_pgp_hex);
 my ( @even, @odd, %rev_even, %rev_odd );
 
 sub encode_pgp {
-  my $c = 0;
-  return map { $c++ & 1 ? $odd[$_] : $even[$_] } unpack "C*", $_[0];
+    my $c = 0;
+    return map { $c++ & 1 ? $odd[$_] : $even[$_] } unpack "C*", $_[0];
 }
 
 sub decode_pgp {
-  my @input = @_ > 1 ? @_ : split " ", $_[0];
-  my ( $c, @data ) = 0;
-  for my $word (@input) {
-    my $value = ( $c++ & 1 ? $rev_odd{ lc $word } : $rev_even{ lc $word } );
-    croak "Encoding error detected at word $c ('$word')"
-      unless defined $value;
-    push @data, $value;
-  }
-  return pack "C*", @data;
+    my @input = @_ > 1 ? @_ : split " ", $_[0];
+    my ( $c, @data ) = 0;
+    for my $word (@input) {
+        my $value = ( $c++ & 1 ? $rev_odd{ lc $word } : $rev_even{ lc $word } );
+        croak "Encoding error detected at word $c ('$word')"
+          unless defined $value;
+        push @data, $value;
+    }
+    return pack "C*", @data;
 }
 
 sub encode_pgp_hex {
-  my $string = shift;
-  $string =~ s/^0x//i;
-  return encode_pgp( pack "H*", $string );
+    my $string = shift;
+    $string =~ s/^0x//i;
+    return encode_pgp( pack "H*", $string );
 }
 
 sub decode_pgp_hex {
-   return "0x" . unpack "H*", decode_pgp(@_);
+    return "0x" . unpack "H*", decode_pgp(@_);
 }
+
+#<<< No perltidy
 
 @even = qw(
   aardvark absurd accrue acme adrift adult afflict ahead aimless
@@ -104,6 +106,8 @@ sub decode_pgp_hex {
   vocalist voyager warranty Waterloo whimsical Wichita Wilmington Wyoming
   yesteryear Yucatan
 );
+
+#>>> # no perl tidy
 
 @rev_even{ map { lc } @even } = 0 .. $#even;
 @rev_odd{ map  { lc } @odd }  = 0 .. $#odd;
